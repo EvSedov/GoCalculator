@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/EvSedov/GoCalculator/handlers"
+	"github.com/EvSedov/GoCalculator/web/handlers"
 	"github.com/gofiber/fiber/v2"
 )
 

@@ -7,11 +7,12 @@ import (
 
 func main() {
 
-	engine := html.New("./views", ".html")
+	engine := html.New("web/template", ".html")
 	app := fiber.New(fiber.Config{
 		Views:       engine,
 		ViewsLayout: "layouts/main",
 	})
+	app.Static("/", "web/static")
 
 	setupRoutes(app)
 
