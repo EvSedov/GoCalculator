@@ -7,7 +7,9 @@ type Calc struct {
 }
 
 func Home(c *fiber.Ctx) error {
-	return c.SendString("Hello World :-)")
+	return c.Render("index", fiber.Map{
+		"Title": "Distributed calculator",
+	})
 }
 
 func CreateCalc(c *fiber.Ctx) error {
