@@ -1,20 +1,21 @@
 package main
 
 import (
+	"github.com/evsedov/GoCalculator/web/routes"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/template/html/v2"
 )
 
 func main() {
 
-	engine := html.New("web/template", ".html")
+	engine := html.New("template", ".html")
 	app := fiber.New(fiber.Config{
 		Views:       engine,
 		ViewsLayout: "layouts/main",
 	})
-	app.Static("/", "web/static")
+	app.Static("/", "./static")
 
-	setupRoutes(app)
+	routes.SetupRoutes(app)
 
-	app.Listen(":3000")
+	app.Listen(":8080")
 }

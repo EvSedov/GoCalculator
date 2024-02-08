@@ -13,12 +13,7 @@ func Home(c *fiber.Ctx) error {
 }
 
 func CreateCalc(c *fiber.Ctx) error {
-	calc := Calc{}
-	if err := c.BodyParser(&calc); err != nil {
-		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-			"message": err.Error(),
-		})
-	}
+	exp := c.FormValue("expression", "")
 
-	return c.Status(fiber.StatusAccepted).JSON(calc)
+	return c.Status(fiber.StatusAccepted).SendString(exp)
 }
