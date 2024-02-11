@@ -7,6 +7,4 @@ import (
 
 func SetupRoutes(app *fiber.App) {
 	app.Get("/", handlers.Home)
-
-	app.Post("/getexp", handlers.CreateCalc)
 }

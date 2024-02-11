@@ -11,9 +11,3 @@ func Home(c *fiber.Ctx) error {
 		"Title": "Distributed calculator",
 	})
 }
-
-func CreateCalc(c *fiber.Ctx) error {
-	exp := c.FormValue("expression", "")
-
-	return c.Status(fiber.StatusAccepted).SendString(exp)
-}
