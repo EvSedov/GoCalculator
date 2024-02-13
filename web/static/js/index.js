@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
   };
   
   async function sendData(data) {
-    return await fetch('http://127.0.0.1:81/getexp', {
+    return await fetch('http://127.0.0.1:81/expressions', {
       method: 'POST',
       mode: 'cors',
       headers: { 'Content-Type': 'multipart/form-data' },
