@@ -2,32 +2,32 @@ package routes
 
 import (
 	"github.com/evsedov/GoCalculator/backend/handlers"
+	"github.com/evsedov/GoCalculator/backend/storage"
 	"github.com/gofiber/fiber/v2"
 )
 
-func SetupRoutes(backApp *fiber.App) {
-	backApp.Get("/", handlers.HomeHandler)
+func SetupRoutes(app *fiber.App) {
+	expressionHandler := &handlers.ExpressionHandler{
+		Storage: &storage.ExpressionStorage{
+			Expressions: make(map[string]storage.Expression),
+		},
+	}
 
-	backApp.Get("/expressions", handlers.GetExpressions)
+	app.Post("/expressions", expressionHandler.CreateExpression)
 
-	backApp.Post("/expressions", handlers.SetExpression)
+	app.Get("/expressions/:expressionId", expressionHandler.GetExpressionById)
 
-	backApp.Get("/expressions/:expressionId", func(c *fiber.Ctx) error {
-
-		return c.SendString("Get expression id = " + c.Params("expressionId"))
-	})
-
-	backApp.Get("/operations", func(c *fiber.Ctx) error {
+	app.Get("/operations", func(c *fiber.Ctx) error {
 
 		return c.SendString("Return lists of operations")
 	})
 
-	backApp.Get("/task", func(c *fiber.Ctx) error {
+	app.Get("/task", func(c *fiber.Ctx) error {
 
 		return c.SendString("Return subexpression for calculate")
 	})
 
-	backApp.Post("/task/:taskId", func(c *fiber.Ctx) error {
+	app.Post("/task/:taskId", func(c *fiber.Ctx) error {
 
 		return c.SendString("Get result of calculate for subexpression on " + c.Params("taskId"))
 	})

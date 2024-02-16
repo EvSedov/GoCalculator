@@ -1,6 +1,6 @@
 package utils
 
-func CalcExpression(left, right float64, sign string) float64 {
+func Calc(left, right float64, sign string) float64 {
 	var result float64
 	switch sign {
 	case "+":
