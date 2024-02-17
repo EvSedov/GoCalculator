@@ -7,6 +7,7 @@ import (
 	"github.com/google/uuid"
 
 	"github.com/evsedov/GoCalculator/backend/storage"
+	"github.com/evsedov/GoCalculator/backend/utils"
 )
 
 type (
@@ -29,6 +30,8 @@ type (
 
 func (h *ExpressionHandler) CreateExpression(c *fiber.Ctx) error {
 	var request CreateExpressionRequest
+	var message string
+
 	if err := c.BodyParser(&request); err != nil {
 		return fmt.Errorf("body parser: %w", err)
 	}
@@ -39,6 +42,13 @@ func (h *ExpressionHandler) CreateExpression(c *fiber.Ctx) error {
 		Expression:   request.Expression,
 		State:        "in_progress",
 	}
+	exp := utils.DelSpaceFromString((expression.Expression))
+
+	if utils.IsValidExpression(exp) {
+		message = "the expression will be calculated soon"
+	} else {
+		message = "expression parsing error"
+	}
 
 	id, err := h.Storage.CreateExpression(expression)
 	if err != nil {
@@ -48,8 +58,8 @@ func (h *ExpressionHandler) CreateExpression(c *fiber.Ctx) error {
 	return c.Status(200).JSON(CreateExpressionResponse{
 		ExpressionId: id,
 		RequestID:    request.RequestID,
-		Expression:   request.Expression,
-		Message:      "the expression will be calculated soon",
+		Expression:   exp,
+		Message:      message,
 	})
 }
 
