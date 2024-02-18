@@ -1,21 +1,21 @@
 package routes
 
 import (
-	"github.com/evsedov/GoCalculator/backend/handlers"
-	"github.com/evsedov/GoCalculator/backend/storage"
+	"github.com/evsedov/GoCalculator/orchestrator/handlers"
+	"github.com/evsedov/GoCalculator/orchestrator/storage"
 	"github.com/gofiber/fiber/v2"
 )
 
-func SetupRoutes(app *fiber.App) {
-	expressionHandler := &handlers.ExpressionHandler{
+func SetupRoutesOrchestrator(app *fiber.App) {
+	orchestratorHandler := &handlers.OrchestratorHandler{
 		Storage: &storage.ExpressionStorage{
 			Expressions: make(map[string]storage.Expression),
 		},
 	}
 
-	app.Post("/expressions", expressionHandler.CreateExpression)
+	app.Post("/expressions", orchestratorHandler.CreateExpression)
 
-	app.Get("/expressions/:expressionId", expressionHandler.GetExpressionById)
+	app.Get("/expressions/:expressionId", orchestratorHandler.GetExpressionById)
 
 	app.Get("/operations", func(c *fiber.Ctx) error {
 

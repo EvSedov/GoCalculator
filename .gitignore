@@ -23,5 +23,4 @@ go.work
 go.work.sum
 
 # tmp
-backend/tmp
-web/tmp
+*/tmp

@@ -6,8 +6,8 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/google/uuid"
 
-	"github.com/evsedov/GoCalculator/backend/storage"
-	"github.com/evsedov/GoCalculator/backend/utils"
+	"github.com/evsedov/GoCalculator/orchestrator/storage"
+	"github.com/evsedov/GoCalculator/orchestrator/utils"
 )
 
 type (
@@ -23,12 +23,12 @@ type (
 		Message      string `json:"message"`
 	}
 
-	ExpressionHandler struct {
+	OrchestratorHandler struct {
 		Storage storage.ExpressionCreatorGetter
 	}
 )
 
-func (h *ExpressionHandler) CreateExpression(c *fiber.Ctx) error {
+func (h *OrchestratorHandler) CreateExpression(c *fiber.Ctx) error {
 	var request CreateExpressionRequest
 	var message string
 
@@ -63,7 +63,7 @@ func (h *ExpressionHandler) CreateExpression(c *fiber.Ctx) error {
 	})
 }
 
-func (h *ExpressionHandler) GetExpressionById(c *fiber.Ctx) error {
+func (h *OrchestratorHandler) GetExpressionById(c *fiber.Ctx) error {
 	expression_id := c.Params("expression_id")
 
 	expression, err := h.Storage.GetExpression(expression_id)

@@ -10,10 +10,17 @@ services:
     volumes:
       - ./web:/usr/src/app/web
     command: air ./app/main.go -b 0.0.0.0
-  backend:
-    build: ./backend/
+  orchestrator:
+    build: ./orchestrator
     ports:
       - 81:81
     volumes:
-      - ./backend:/usr/src/app/backend
-    command: air ./app/main.go -b 0.0.0.0
+      - ./orchestrator:/usr/src/app/orchestrator
+    command: air ./main.go -b 0.0.0.0
+  calculator:
+    build: ./calculator
+    ports:
+      - 85:85
+    volumes:
+      - ./calculator:/usr/src/app/calculator
+    command: air ./main.go -b 0.0.0.0
