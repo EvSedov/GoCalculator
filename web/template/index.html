@@ -11,12 +11,12 @@
 </ul>
 <div class="tab-content pt-5" id="tab-content">
   <div class="tab-pane active" id="icon-tabpanel-0" role="tabpanel" aria-labelledby="icon-tab-0">
-    <form id="form-expression">
+    <form id="form-expression" name="FormExpression">
       <div class="mb-3">
         <label for="inputExpression" class="form-label">Arithmetic expression</label>
         <input type="text" name="expression" class="form-control" id="input-expression" placeholder="enter an arithmetic expression">
       </div>
-      <button id="btn-send" type="submit" class="btn btn-primary">Send</button>
+      <button id="btn-send" type="submit" class="btn btn-primary" data-bs-toggle="tooltip">Send</button>
     </form>
     <ul class="list-group mt-3"></ul>
   </div>

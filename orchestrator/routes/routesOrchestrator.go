@@ -10,8 +10,11 @@ func SetupRoutesOrchestrator(app *fiber.App) {
 	orchestratorHandler := &handlers.OrchestratorHandler{
 		Storage: &storage.ExpressionStorage{
 			Expressions: make(map[string]storage.Expression),
+			Ids:         make([]string, 0),
 		},
 	}
+
+	app.Get("/expressions", orchestratorHandler.GetExpressions)
 
 	app.Post("/expressions", orchestratorHandler.CreateExpression)
 

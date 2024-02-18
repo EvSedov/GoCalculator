@@ -17,10 +17,7 @@ type (
 	}
 
 	CreateExpressionResponse struct {
-		RequestID    string `json:"request_id"`
-		ExpressionId string `json:"expression_id"`
-		Expression   string `json:"expression"`
-		Message      string `json:"message"`
+		Expressions []storage.Expression `json:"expressions"`
 	}
 
 	OrchestratorHandler struct {
@@ -30,7 +27,6 @@ type (
 
 func (h *OrchestratorHandler) CreateExpression(c *fiber.Ctx) error {
 	var request CreateExpressionRequest
-	var message string
 
 	if err := c.BodyParser(&request); err != nil {
 		return fmt.Errorf("body parser: %w", err)
@@ -40,36 +36,51 @@ func (h *OrchestratorHandler) CreateExpression(c *fiber.Ctx) error {
 		ExpressionId: uuid.New().String(),
 		RequestID:    request.RequestID,
 		Expression:   request.Expression,
-		State:        "in_progress",
 	}
 	exp := utils.DelSpaceFromString((expression.Expression))
 
 	if utils.IsValidExpression(exp) {
-		message = "the expression will be calculated soon"
+		expression.Message = "the expression will be calculated soon"
+		expression.State = "valid"
 	} else {
-		message = "expression parsing error"
+		expression.Message = "expression parsing error"
+		expression.State = "error"
+		// return c.Status(400).JSON(expression)
 	}
 
 	id, err := h.Storage.CreateExpression(expression)
 	if err != nil {
-		return fmt.Errorf("create order: %w", err)
+		return c.SendStatus(500)
 	}
 
-	return c.Status(200).JSON(CreateExpressionResponse{
-		ExpressionId: id,
-		RequestID:    request.RequestID,
-		Expression:   exp,
-		Message:      message,
-	})
+	newExpression, _ := h.Storage.GetExpressionById(id)
+
+	return c.Status(200).JSON(newExpression)
 }
 
 func (h *OrchestratorHandler) GetExpressionById(c *fiber.Ctx) error {
 	expression_id := c.Params("expression_id")
 
-	expression, err := h.Storage.GetExpression(expression_id)
+	expression, err := h.Storage.GetExpressionById(expression_id)
 	if err != nil {
-		return fmt.Errorf("get order: %w", err)
+		return c.SendStatus(500)
 	}
 
-	return c.JSON(expression)
+	return c.Status(200).JSON(expression)
+}
+
+func (h *OrchestratorHandler) GetExpressions(c *fiber.Ctx) error {
+	expressions := make([]storage.Expression, 0)
+	ids := h.Storage.GetIds()
+
+	for _, id := range ids {
+		expression, err := h.Storage.GetExpressionById(id)
+		if err != nil {
+			return c.SendStatus(500)
+		}
+
+		expressions = append(expressions, expression)
+	}
+
+	return c.Status(200).JSON(expressions)
 }
