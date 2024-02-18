@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  web:
+    build: ./web/
+    env_file:
+      - .env
+    ports:
+      - 80:80
+    volumes:
+      - ./web:/usr/src/app/web
+    command: air ./app/main.go -b 0.0.0.0
+  orchestrator:
+    build: ./orchestrator
+    ports:
+      - 81:81
+    volumes:
+      - ./orchestrator:/usr/src/app/orchestrator
+    command: air ./main.go -b 0.0.0.0
+  calculator:
+    build: ./calculator
+    ports:
+      - 85:85
+    volumes:
+      - ./calculator:/usr/src/app/calculator
+    command: air ./main.go -b 0.0.0.0
