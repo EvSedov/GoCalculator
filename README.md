@@ -20,7 +20,7 @@
 ![Схема взаимодействия web-сервера и сервера-оркестратора](https://downloader.disk.yandex.ru/preview/5705355ef7f21561f388d7a938ebba82f9d291a072177b9d5bc95db8c14d5292/65d3c094/6ArsLu5A87M8qXRxfYODxiKIIghSL3tqNIk0pGzHj3aCukkycZ7LvuNF5fptox3blcGZIg5nE6zU2J01ZD1VYQ%3D%3D?uid=0&filename=2024-02-19_23-56-03.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=0&tknv=v2&size=2088x1218)
 
 - Схема взаимодействия сервера-оркестратора и сервера-вычислителя
-
+![Схема взаимодействия сервера-оркестратора и сервера-вычислителя](https://downloader.disk.yandex.ru/preview/1e827ed5ef84888598797a7035c6fec0e8ceeb13615da48e34b2c82deeed5490/65d3c6df/lCxAtsH4Mi2qucAWog69n2woBslr9SNX8hkxYCZtJlSdxzS1Wa-L5tzaYt_PgfcRgYsRm6bgO7xDEzoHJdBttw%3D%3D?uid=0&filename=2024-02-20_00-23-12.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=0&tknv=v2&size=2088x1218)
 
 ## Introduction  
 ### Условия задачи
