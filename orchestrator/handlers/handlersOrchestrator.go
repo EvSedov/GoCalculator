@@ -32,7 +32,6 @@ func (h *OrchestratorHandler) CreateExpression(c *fiber.Ctx) error {
 	expression.ExpressionId = uuid.New().String()
 	expression.RequestID = request.RequestID
 	expression.Expression = utils.DelSpaceFromString((request.Expression))
-	expression.Result = ""
 
 	if utils.IsValidExpression(expression.Expression) {
 		expression.Message = "the expression will be calculated soon"
@@ -49,8 +48,8 @@ func (h *OrchestratorHandler) CreateExpression(c *fiber.Ctx) error {
 
 func (h *OrchestratorHandler) GetExpressionById(c *fiber.Ctx) error {
 	expression := models.Expression{}
-	expression_id := c.Params("expression_id")
-	database.DB.Db.Find(expression, expression_id)
+	expressionId := c.Params("expression_id")
+	database.DB.Db.Where("expression_id = ?", expressionId).First(&expression)
 
 	return c.Status(200).JSON(expression)
 }

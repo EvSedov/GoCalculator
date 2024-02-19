@@ -11,7 +11,7 @@ type (
 		ExpressionId string `json:"expression_id" gorm:"text;not null;default:null"`
 		Expression   string `json:"expression" gorm:"text;not null;default:null"`
 		State        string `json:"state" gorm:"text;not null;default:null"`
-		Result       string `json:"result" gorm:"text;not null;default:null"`
+		Result       string `json:"result" gorm:"text"`
 		Message      string `json:"message" gorm:"text;not null;default:null"`
 	}
 )

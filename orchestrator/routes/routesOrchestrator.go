@@ -12,7 +12,7 @@ func SetupRoutesOrchestrator(app *fiber.App) {
 
 	app.Post("/expressions", orchestratorHandler.CreateExpression)
 
-	app.Get("/expressions/:expressionId", orchestratorHandler.GetExpressionById)
+	app.Get("/expressions/:expression_id", orchestratorHandler.GetExpressionById)
 
 	app.Get("/operations", func(c *fiber.Ctx) error {
 
