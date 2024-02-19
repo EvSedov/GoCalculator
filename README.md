@@ -19,6 +19,9 @@
 - Схема взаимодействия web-сервера и сервера-оркестратора
 ![Схема взаимодействия web-сервера и сервера-оркестратора](https://downloader.disk.yandex.ru/preview/99032f4504a5ae7d8f07a6a3afc94769a367fd270dad7d6466a91c33a1b9e3dc/65d30613/LmYSVoa-NvpaRd0oBOej6LvOvxR6sRJzl4oscVYTaif5u9Vm4iqqeA1JUj_fwVp1cjuvNSkY8P59B40FYqoROA%3D%3D?uid=0&filename=2024-02-19_10-27-35.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=0&tknv=v2&size=2088x1218)
 
+- Схема взаимодействия сервера-оркестратора и сервера-вычислителя
+
+
 ## Introduction  
 ### Условия задачи
 ---

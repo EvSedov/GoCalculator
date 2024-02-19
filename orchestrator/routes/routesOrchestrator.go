@@ -2,17 +2,11 @@ package routes
 
 import (
 	"github.com/evsedov/GoCalculator/orchestrator/handlers"
-	"github.com/evsedov/GoCalculator/orchestrator/storage"
 	"github.com/gofiber/fiber/v2"
 )
 
 func SetupRoutesOrchestrator(app *fiber.App) {
-	orchestratorHandler := &handlers.OrchestratorHandler{
-		Storage: &storage.ExpressionStorage{
-			Expressions: make(map[string]storage.Expression),
-			Ids:         make([]string, 0),
-		},
-	}
+	orchestratorHandler := &handlers.OrchestratorHandler{}
 
 	app.Get("/expressions", orchestratorHandler.GetExpressions)
 
