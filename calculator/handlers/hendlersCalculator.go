@@ -36,7 +36,7 @@ func (calc *CalculatorHendler) Start(ctx *fiber.Ctx) error {
 		return ctx.Status(500).SendString("error: parse json")
 	}
 
-	resp, err := http.Post("http://127.0.0.1:81/task", "application/json", bytes.NewReader(jsonData))
+	resp, err := http.Post("http://172.24.113.173:81/task", "application/json", bytes.NewReader(jsonData))
 	if err != nil {
 		return ctx.Status(500).SendString("error: send post response")
 	}

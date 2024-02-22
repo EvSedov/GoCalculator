@@ -7,6 +7,7 @@ import (
 
 	"github.com/evsedov/GoCalculator/orchestrator/models"
 	"gorm.io/driver/postgres"
+	"github.com/joho/godotenv"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 )
@@ -18,6 +19,11 @@ type Dbinstance struct {
 var DB Dbinstance
 
 func ConnectDb() {
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatalf("err loading: %v", err)
+	}
+
 	dsn := fmt.Sprintf(
 		"host=db user=%s password=%s dbname=%s port=5433 sslmode=disable TimeZone=Asia/Shanghai",
 		os.Getenv("DB_USER"),

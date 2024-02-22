@@ -1,8 +1,8 @@
 package handlers
 
 import (
-	// "encoding/json"
-	// "errors"
+	"encoding/json"
+	"errors"
 	// "os"
 	// "github.com/evsedov/GoCalculator/web/utils"
 	"github.com/gofiber/fiber/v2"
@@ -33,23 +33,23 @@ func (mh *MainHandler) GetMain(c *fiber.Ctx) error {
 	// 	return c.Status(400).SendString(err.Error())
 	// }
 
-	// var expressions []Expression
-	// URL := "http://127.0.0.1:81/expressions"
-	// agent := fiber.Get(URL)
-	// agent.ContentType("application/json")
-	// _, body, errs := agent.Bytes()
-	// if len(errs) > 0 {
-	// 	return errors.Join(errs...)
-	// }
+	var expressions []Expression
+	URL := "http://172.24.113.173:81/expressions"
+	agent := fiber.Get(URL)
+	agent.ContentType("application/json")
+	_, body, errs := agent.Bytes()
+	if len(errs) > 0 {
+		return errors.Join(errs...)
+	}
 
-	// err := json.Unmarshal(body, &expressions)
-	// if err != nil {
-	// 	return c.Status(400).SendString(err.Error())
-	// }
+	err := json.Unmarshal(body, &expressions)
+	if err != nil {
+		return c.Status(400).SendString(err.Error())
+	}
 
 	return c.Render("index", fiber.Map{
-		"Title": "Distributed calculator",
-		// "Expressions": expressions,
+		"Title":       "Distributed calculator",
+		"Expressions": expressions,
 		// "URL":         URL,
 	})
 }

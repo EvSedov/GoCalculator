@@ -26,7 +26,7 @@ type (
 
 const (
 	// BaseURL = "http://172.18.0.1:81/task"
-	BaseURL = "http://127.0.0.1:81/task"
+	BaseURL = "http://172.24.113.173:81/task"
 )
 
 type Client struct {
