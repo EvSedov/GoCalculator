@@ -6,5 +6,6 @@ import (
 
 func main() {
 	calculator := &calculator.Calculator{}
+
 	calculator.Start()
 }

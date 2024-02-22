@@ -8,5 +8,5 @@ import (
 func SetupRoutesCalculator(app *fiber.App) {
 	calculatorHandlers := &handlers.CalculatorHendler{}
 
-	app.Get("/calc", calculatorHandlers.Registration)
+	app.Get("/start", calculatorHandlers.Start)
 }

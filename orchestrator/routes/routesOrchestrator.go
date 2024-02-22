@@ -19,14 +19,8 @@ func SetupRoutesOrchestrator(app *fiber.App) {
 		return c.SendString("Return lists of operations")
 	})
 
-	app.Get("/task", func(c *fiber.Ctx) error {
+	app.Get("/task", orchestratorHandler.GetValidExpressionToWork)
 
-		return c.SendString("Return subexpression for calculate")
-	})
-
-	app.Post("/task/:taskId", func(c *fiber.Ctx) error {
-
-		return c.SendString("Get result of calculate for subexpression on " + c.Params("taskId"))
-	})
+	app.Post("/task", orchestratorHandler.UpdateExpressionInWork)
 
 }
