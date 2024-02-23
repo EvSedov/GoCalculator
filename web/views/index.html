@@ -19,7 +19,7 @@
       <button id="btn-send" type="submit" class="btn btn-primary" data-bs-toggle="tooltip">Send</button>
     </form>
     <ul class="list-group mt-3">
-      {{ if .Expressions}}
+      {{if .Expressions}}
         {{ range .Expressions }}
             <li class="list-group-item d-flex justify-content-between align-items-start">
               <div class="ms-2 me-auto">
@@ -83,7 +83,7 @@
       {{else}}
         <li class="list-group-item d-flex justify-content-between align-items-start">
           <div class="ms-2 me-auto">
-            <div class="fw-bold">Нет невалидных выражений</div>
+            <div class="fw-bold">Выражений нет</div>
           </div>
         </li>
       {{end}}
