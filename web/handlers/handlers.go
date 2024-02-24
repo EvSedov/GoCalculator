@@ -23,7 +23,7 @@ type (
 func (mh *MainHandler) GetMain(c *fiber.Ctx) error {
 	
 	var expressions []Expression
-	URL := "http://orchestrator:81/expressions"
+	URL := "http://orchestrator:8081/expressions"
 	agent := fiber.Get(URL)
 	agent.ContentType("application/json")
 	_, body, errs := agent.Bytes()

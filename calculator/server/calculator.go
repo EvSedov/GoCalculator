@@ -15,5 +15,5 @@ func (o *Calculator) Start() {
 	serverCalculator := fiber.New()
 
 	routes.SetupRoutesCalculator(serverCalculator)
-	serverCalculator.Listen(":85")
+	serverCalculator.Listen(":8085")
 }

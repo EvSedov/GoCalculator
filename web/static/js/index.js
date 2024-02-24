@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
   };
   
   async function sendData(data) {
-    return await fetch('http://127.0.0.1:81/expressions', {
+    return await fetch('http://localhost:8081/expressions', {
       method: 'POST',
       mode: 'cors',
       body: data,

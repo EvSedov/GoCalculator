@@ -25,8 +25,7 @@ type (
 )
 
 const (
-	// BaseURL = "http://172.18.0.1:81/task"
-	BaseURL = "http://orchestrator:81/task"
+	BaseURL = "http://orchestrator:8081/task"
 )
 
 type Client struct {

@@ -36,7 +36,7 @@ func (calc *CalculatorHendler) Start(ctx *fiber.Ctx) error {
 		return ctx.Status(500).SendString("error: parse json")
 	}
 
-	resp, err := http.Post("http://orchestrator:81/task", "application/json", bytes.NewReader(jsonData))
+	resp, err := http.Post("http://orchestrator:8081/task", "application/json", bytes.NewReader(jsonData))
 	if err != nil {
 		return ctx.Status(500).SendString("error: send post response")
 	}
@@ -53,7 +53,7 @@ func (calc *CalculatorHendler) Start(ctx *fiber.Ctx) error {
 
 	err = json.Unmarshal(responseBytes, &expressionFromServer)
 	if err != nil {
-		return ctx.Status(500).SendString("error: parse json from server")
+		return ctx.Status(500).SendString("выражение посчитано и возвращено в оркестратор для обновления базы данных")
 	}
 
 	return ctx.Status(200).JSON(expressionFromServer)

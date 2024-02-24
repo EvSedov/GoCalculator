@@ -13,5 +13,5 @@ func (o *Orchestrator) Start() {
 	server.Use(cors.New())
 
 	routes.SetupRoutesOrchestrator(server)
-	server.Listen(":81")
+	server.Listen(":8081")
 }
