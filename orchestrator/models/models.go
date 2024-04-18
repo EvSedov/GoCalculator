@@ -14,4 +14,8 @@ type (
 		Result       string `json:"result" gorm:"text"`
 		Message      string `json:"message" gorm:"text;not null;default:null"`
 	}
+
+	User struct {
+		Id string `json:"id" gorm:""`
+	}
 )

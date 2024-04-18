@@ -1,4 +1,4 @@
-package orchestrator
+package app
 
 import (
 	"github.com/evsedov/GoCalculator/orchestrator/routes"
@@ -8,7 +8,7 @@ import (
 
 type Orchestrator struct{}
 
-func (o *Orchestrator) Start() {
+func (o *Orchestrator) Run() {
 	server := fiber.New()
 	server.Use(cors.New())
 

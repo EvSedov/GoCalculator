@@ -1,14 +1,13 @@
 package main
 
 import (
+	"github.com/evsedov/GoCalculator/orchestrator/app"
 	"github.com/evsedov/GoCalculator/orchestrator/database"
-	"github.com/evsedov/GoCalculator/orchestrator/server"
 )
 
 func main() {
-	database.ConnectDb()
+	database.Connect()
 
-	orchestrator := &orchestrator.Orchestrator{}
-
-	orchestrator.Start()
+	orchestrator := &app.Orchestrator{}
+	orchestrator.Run()
 }

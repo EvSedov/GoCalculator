@@ -6,19 +6,19 @@ import (
 	"os"
 
 	"github.com/evsedov/GoCalculator/orchestrator/models"
-	"gorm.io/driver/postgres"
 	"github.com/joho/godotenv"
+	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 )
 
-type Dbinstance struct {
+type DBInstance struct {
 	Db *gorm.DB
 }
 
-var DB Dbinstance
+var DB DBInstance
 
-func ConnectDb() {
+func Connect() {
 	err := godotenv.Load()
 	if err != nil {
 		log.Fatalf("err loading: %v", err)
@@ -39,13 +39,13 @@ func ConnectDb() {
 		os.Exit(2)
 	}
 
-	log.Println("connected")
+	log.Println("connected to database")
 	db.Logger = logger.Default.LogMode(logger.Info)
 
 	log.Println("running migrations")
 	db.AutoMigrate(&models.Expression{})
 
-	DB = Dbinstance{
+	DB = DBInstance{
 		Db: db,
 	}
 }
