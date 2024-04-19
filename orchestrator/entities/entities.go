@@ -1,4 +1,4 @@
-package models
+package entities
 
 import (
 	"gorm.io/gorm"
@@ -16,6 +16,9 @@ type (
 	}
 
 	User struct {
-		Id string `json:"id" gorm:""`
+		Id       uint
+		Name     string
+		Email    string `gorm:"unique"`
+		Password []byte
 	}
 )

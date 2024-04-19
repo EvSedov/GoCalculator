@@ -12,6 +12,6 @@ func (o *Orchestrator) Run() {
 	server := fiber.New()
 	server.Use(cors.New())
 
-	routes.SetupRoutesOrchestrator(server)
+	routes.Setup(server)
 	server.Listen(":8081")
 }
