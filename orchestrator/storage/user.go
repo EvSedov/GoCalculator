@@ -15,20 +15,22 @@ func (s *storage) Create(user *entities.User) (err error) {
 	return nil
 }
 
-func (s *storage) Login(user *entities.User) (err error) {
+func (s *storage) Login(user *entities.User) (data []byte, err error) {
 	email := user.Email
 	password := user.Password
 	var dbUser entities.User
 	s.DB.Where("email = ?", email).First(&dbUser)
 	if dbUser.Id == 0 {
 		err = errors.New("user not found")
-		return err
+		return nil, err
 	}
 
-	if err = bcrypt.CompareHashAndPassword(dbUser.Password, []byte(password)); err != nil {
+	dbHash := dbUser.Password
+
+	if err = bcrypt.CompareHashAndPassword(dbHash, []byte(password)); err != nil {
 		err2 := errors.New("incorrect login or password")
-		return err2
+		return nil, err2
 	}
 
-	return nil
+	return dbHash, nil
 }

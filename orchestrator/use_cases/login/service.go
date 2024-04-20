@@ -20,14 +20,14 @@ func NewService(user UserLogin) *Service {
 }
 
 func (s *Service) Login(user entities.User) *Response {
-	err := s.user.Login(&user)
+	data, err := s.user.Login(&user)
 	if err != nil {
 		return &Response{
 			Error: err.Error(),
 		}
 	}
 
-	const hmacSampleSecret = "qwerty_secret_357"
+	hmacSampleSecret := data
 	now := time.Now()
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"email": user.Email,
@@ -36,9 +36,11 @@ func (s *Service) Login(user entities.User) *Response {
 		"iat":   now.Unix(),
 	})
 
-	tokenString, err := token.SignedString([]byte(hmacSampleSecret))
+	tokenString, err := token.SignedString(hmacSampleSecret)
 	if err != nil {
-		panic(err)
+		return &Response{
+			Error: err.Error(),
+		}
 	}
 
 	return &Response{

@@ -20,10 +20,20 @@ func MakeHandler(s *Service) func(c *fiber.Ctx) error {
 			Password: []byte(payload["password"]),
 		}
 		response := s.Login(user)
+		if response.Error != "" {
+			c.Status(fiber.StatusForbidden)
+
+			return c.JSON(fiber.Map{
+				"message": response.Error,
+			})
+		}
+
 		token := response.Token
 		c.Set("Authorization", token)
 		c.Status(fiber.StatusOK)
 
-		return c.JSON(response.Error)
+		return c.JSON(fiber.Map{
+			"message": "ok",
+		})
 	}
 }
