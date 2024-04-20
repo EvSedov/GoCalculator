@@ -1,8 +1,6 @@
 package register
 
 import (
-	"encoding/json"
-
 	"github.com/evsedov/GoCalculator/orchestrator/entities"
 )
 
@@ -19,23 +17,14 @@ func NewService(user UserCreater) *Service {
 }
 
 func (s *Service) CreateUser(user entities.User) Response {
-	var responseUser entities.User
-
-	u, err := s.user.Create(&user)
+	err := s.user.Create(&user)
 	if err != nil {
 		return Response{
-			Error: err,
-		}
-	}
-
-	if err = json.Unmarshal(u, &responseUser); err != nil {
-		return Response{
-			Error: err,
+			Error: err.Error(),
 		}
 	}
 
 	return Response{
-		User:  responseUser,
-		Error: nil,
+		Error: "",
 	}
 }

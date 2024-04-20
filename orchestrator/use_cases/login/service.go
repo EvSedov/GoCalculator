@@ -1,9 +1,10 @@
 package login
 
 import (
-	"encoding/json"
+	"time"
 
 	"github.com/evsedov/GoCalculator/orchestrator/entities"
+	"github.com/golang-jwt/jwt/v5"
 )
 
 type (
@@ -19,22 +20,29 @@ func NewService(user UserLogin) *Service {
 }
 
 func (s *Service) Login(user entities.User) *Response {
-	var responseUser entities.User
-	u, err := s.user.Login(&user)
+	err := s.user.Login(&user)
 	if err != nil {
 		return &Response{
 			Error: err.Error(),
 		}
 	}
 
-	if err = json.Unmarshal(u, &responseUser); err != nil {
-		return &Response{
-			Error: err.Error(),
-		}
+	const hmacSampleSecret = "qwerty_secret_357"
+	now := time.Now()
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
+		"email": user.Email,
+		"nbf":   now.Unix(),
+		"exp":   now.Add(5 * time.Hour).Unix(),
+		"iat":   now.Unix(),
+	})
+
+	tokenString, err := token.SignedString([]byte(hmacSampleSecret))
+	if err != nil {
+		panic(err)
 	}
 
 	return &Response{
-		User:  responseUser,
+		Token: tokenString,
 		Error: "",
 	}
 }

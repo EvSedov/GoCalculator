@@ -15,22 +15,17 @@ func Setup(app *fiber.App) {
 	registerService := register.NewService(storage)
 	loginService := login.NewService(storage)
 
-	app.Post("/api/register", register.MakeHandler(registerService))
-	app.Post("/api/login", login.MakeHandler(loginService))
+	api := app.Group("api")
+	v1 := api.Group("v1")
+	v1.Post("/register", register.MakeHandler(registerService))
+	v1.Post("/login", login.MakeHandler(loginService))
 
 	// app.Get("/expressions", orchestratorHandler.GetExpressions)
-
 	// app.Post("/expressions", orchestratorHandler.CreateExpression)
-
 	// app.Get("/expressions/:expression_id", orchestratorHandler.GetExpressionById)
-
 	// app.Get("/operations", func(c *fiber.Ctx) error {
-
 	// 	return c.SendString("Return lists of operations")
 	// })
-
 	// app.Get("/task", orchestratorHandler.GetValidExpressionToWork)
-
 	// app.Post("/task", orchestratorHandler.UpdateExpressionInWork)
-
 }
