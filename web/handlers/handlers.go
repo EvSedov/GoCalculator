@@ -1,8 +1,8 @@
 package handlers
 
 import (
-	"encoding/json"
-	"errors"
+	// "encoding/json"
+	// "errors"
 	// "os"
 	// "github.com/evsedov/GoCalculator/web/utils"
 	"github.com/gofiber/fiber/v2"
@@ -20,24 +20,38 @@ type (
 	MainHandler struct{}
 )
 
-func (mh *MainHandler) GetMain(c *fiber.Ctx) error {
-	
-	var expressions []Expression
-	URL := "http://orchestrator:8081/expressions"
-	agent := fiber.Get(URL)
-	agent.ContentType("application/json")
-	_, body, errs := agent.Bytes()
-	if len(errs) > 0 {
-		return errors.Join(errs...)
-	}
+func (mh *MainHandler) GetHome(c *fiber.Ctx) error {
 
-	err := json.Unmarshal(body, &expressions)
-	if err != nil {
-		return c.Status(400).SendString(err.Error())
-	}
+	// var expressions []Expression
+	// URL := "http://orchestrator:8081/expressions"
+	// agent := fiber.Get(URL)
+	// agent.ContentType("application/json")
+	// _, body, errs := agent.Bytes()
+	// if len(errs) > 0 {
+	// 	return errors.Join(errs...)
+	// }
 
-	return c.Render("index", fiber.Map{
-		"Title":       "Distributed calculator",
-		"Expressions": expressions,
+	// err := json.Unmarshal(body, &expressions)
+	// if err != nil {
+	// 	return c.Status(400).SendString(err.Error())
+	// }
+
+	return c.Render("home", fiber.Map{
+		"Title": "Distributed calculator",
+		// "Expressions": expressions,x
+	})
+}
+
+func (mh *MainHandler) GetLogin(c *fiber.Ctx) error {
+
+	return c.Render("login", fiber.Map{
+		"Title": "Distributed calculator",
+	})
+}
+
+func (mh *MainHandler) GetRegister(c *fiber.Ctx) error {
+
+	return c.Render("register", fiber.Map{
+		"Title": "Distributed calculator",
 	})
 }

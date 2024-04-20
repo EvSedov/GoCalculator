@@ -8,5 +8,7 @@ import (
 func SetupRoutes(app *fiber.App) {
 	mainHandler := &handlers.MainHandler{}
 
-	app.Get("/", mainHandler.GetMain)
+	app.Get("/", mainHandler.GetHome)
+	app.Get("/login", mainHandler.GetLogin)
+	app.Get("/register", mainHandler.GetRegister)
 }
