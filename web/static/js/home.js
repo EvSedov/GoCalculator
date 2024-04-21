@@ -6,26 +6,28 @@ document.addEventListener('DOMContentLoaded', function () {
   const formExpression = document.getElementById('form-expression');
   const _ul = document.querySelector('.list-group');
 
-  function serializeForm(formNode) {
-    return new FormData(formNode)
-  };
-
-  async function sendData(url, data) {
-    return await fetch(url, {
-      method: 'POST',
-      mode: 'cors',
-      body: data,
-    })
-  };
-
   async function handleFormExpressionSubmit(event) {
     let res;
     event.preventDefault();
     const dataExpression = serializeForm(formExpression);
-    dataExpression.append('request_id', crypto.randomUUID())
+    dataExpression.append('request_id',)
 
     if (formExpression.elements.expression.value) {
-      res = await sendData('http://localhost:8081/api/v1/expressions', dataExpression);
+      const expression = formExpression.elements.expression.value
+      const request_id = crypto.randomUUID()
+      res = await sendData('http://localhost:8081/api/v1/expressions', {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json',
+          // 'Access-Control-Allow-Headers': 'Authorization',
+          'Authorization': sessionStorage.auth,
+        },
+        body: {
+          expression,
+          request_id,
+        },
+      });
     }
 
     const response = await res.json();
