@@ -22,14 +22,14 @@ func NewStorage() *storage {
 	}
 	dbPort := 5432
 	hostName := "127.0.0.1"
-	// dbUser := os.Getenv("DB_USER")
+	dbUser := os.Getenv("DB_USER")
 	dbPassword := os.Getenv("DB_PASSWORD")
 	dbName := os.Getenv("DB_NAME")
 
 	dsn := fmt.Sprintf(
 		"host=%s user=%s password=%s dbname=%s port=%d sslmode=disable TimeZone=Asia/Shanghai",
 		hostName,
-		"user",
+		dbUser,
 		dbPassword,
 		dbName,
 		dbPort,

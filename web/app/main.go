@@ -9,13 +9,13 @@ import (
 
 func main() {
 
-	engine := html.New("./views", ".html")
+	engine := html.New("./web/views", ".html")
 	app := fiber.New(fiber.Config{
 		Views:       engine,
 		ViewsLayout: "layouts/main",
 	})
 	app.Use(cors.New())
-	app.Static("/", "./static")
+	app.Static("/", "./web/static")
 
 	routes.SetupRoutes(app)
 

@@ -16,9 +16,9 @@ type (
 	}
 
 	User struct {
-		Id       uint
-		Name     string
-		Email    string `gorm:"unique"`
+		Id       uint   `json:"-" gorm:"primaryKey"`
+		Name     string `json:"name"`
+		Email    string `json:"email" gorm:"unique"`
 		Password []byte
 	}
 )

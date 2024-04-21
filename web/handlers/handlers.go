@@ -38,7 +38,7 @@ func (mh *MainHandler) GetHome(c *fiber.Ctx) error {
 
 	return c.Render("home", fiber.Map{
 		"Title": "Distributed calculator",
-		// "Expressions": expressions,x
+		// "Expressions": expressions,
 	})
 }
 

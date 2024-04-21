@@ -7,12 +7,14 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-func (s *storage) Create(user *entities.User) (err error) {
-	if err = s.DB.Create(&user).Error; err != nil {
-		return err
+func (s *storage) Create(user *entities.User) (data []byte, err error) {
+	var dbUser entities.User
+	if err = s.DB.Create(&user).Scan(&dbUser).Error; err != nil {
+		return nil, err
 	}
 
-	return nil
+	dbHash := dbUser.Password
+	return dbHash, nil
 }
 
 func (s *storage) Login(user *entities.User) (data []byte, err error) {
