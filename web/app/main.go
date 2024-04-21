@@ -14,10 +14,8 @@ func main() {
 		Views:       engine,
 		ViewsLayout: "layouts/main",
 	})
-	app.Use(cors.New())
+	app.Use(cors.New(cors.ConfigDefault))
 	app.Static("/", "./static")
-
 	routes.SetupRoutes(app)
-
 	app.Listen(":8080")
 }

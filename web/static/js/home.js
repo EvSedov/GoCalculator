@@ -1,3 +1,7 @@
+if (!sessionStorage.auth) {
+  location.replace('/login');
+}
+
 document.addEventListener('DOMContentLoaded', function () {
   const formExpression = document.getElementById('form-expression');
   const _ul = document.querySelector('.list-group');

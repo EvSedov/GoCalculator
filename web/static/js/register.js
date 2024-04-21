@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
       sessionStorage.setItem('token', response.token);
       const auth = res.headers.get('Authorization')
       sessionStorage.setItem('auth', auth);
-      location.replace('/login')
+      location.replace('/')
     }
   };
 
