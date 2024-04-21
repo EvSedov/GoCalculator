@@ -1,15 +1,17 @@
 <main class="form-signin w-100 m-auto">
-  <form>
+  <form id="formLogin">
     <h3 class="h3 mb-3 fw-normal">Введите данные</h3>
 
     <div class="form-floating">
-      <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+      <input id="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
       <label for="floatingInput">Email</label>
     </div>
     <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+      <input id="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
       <label for="floatingPassword">Password</label>
     </div>
     <button class="btn btn-primary w-100 py-2" type="submit">Отправить</button>
   </form>
 </main>
+
+<script src="/js/login.js"></script>
