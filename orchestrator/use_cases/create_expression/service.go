@@ -14,7 +14,7 @@ func NewService(expression ExpressionCreater) *Service {
 
 func (s *Service) CreateExpression(expression entities.Expression) *Response {
 
-	if err := s.expression.CreateNew(expression); err != nil {
+	if err := s.expression.CreateNew(&expression); err != nil {
 		return &Response{
 			Message: err.Error(),
 		}

@@ -19,7 +19,7 @@ func MakeHandler(s *Service) func(c *fiber.Ctx) error {
 		}
 
 		var expression entities.Expression
-
+		expression.Email = c.Locals("email").(string)
 		expression.ExpressionId = uuid.New().String()
 		expression.RequestID = payload["expression_id"]
 		expression.RequestID = payload["request_id"]
