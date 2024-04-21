@@ -7,6 +7,7 @@ import (
 type (
 	Expression struct {
 		gorm.Model
+		Email        string `json:"email" gorm:"unique"`
 		RequestID    string `json:"request_id" gorm:"text;not null;default:null"`
 		ExpressionId string `json:"expression_id" gorm:"text;not null;default:null"`
 		Expression   string `json:"expression" gorm:"text;not null;default:null"`

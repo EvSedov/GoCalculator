@@ -4,11 +4,9 @@ import (
 	"fmt"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/google/uuid"
 
 	"github.com/evsedov/GoCalculator/orchestrator/entities"
 	// "github.com/evsedov/GoCalculator/orchestrator/storage"
-	"github.com/evsedov/GoCalculator/orchestrator/utils"
 )
 
 type (
@@ -27,32 +25,6 @@ type (
 
 	Handler struct{}
 )
-
-func (h *Handler) CreateExpression(c *fiber.Ctx) error {
-	var request CreateExpressionRequest
-
-	if err := c.BodyParser(&request); err != nil {
-		return fmt.Errorf("body parser: %w", err)
-	}
-
-	expression := new(entities.Expression)
-
-	expression.ExpressionId = uuid.New().String()
-	expression.RequestID = request.RequestID
-	expression.Expression = utils.DelSpaceFromString((request.Expression))
-
-	if utils.IsValidExpression(expression.Expression) {
-		expression.Message = "the expression will be calculated soon"
-		expression.State = "valid"
-	} else {
-		expression.Message = "expression parsing error"
-		expression.State = "error"
-	}
-
-	// h.Storage.DB.Create(&expression)
-
-	return c.Status(200).JSON(expression)
-}
 
 func (h *Handler) GetExpressionById(c *fiber.Ctx) error {
 	expression := entities.Expression{}

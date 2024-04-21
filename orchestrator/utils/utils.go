@@ -2,6 +2,8 @@ package utils
 
 import "strings"
 
+const Secret = "CTnRkgxS4QK-bRyl_8C51swvvDos9-Xr08A5_HwPE8c"
+
 func Calc(left, right float64, sign string) float64 {
 	var result float64
 	switch sign {
