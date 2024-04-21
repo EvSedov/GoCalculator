@@ -6,6 +6,7 @@ import (
 	// "os"
 	// "github.com/evsedov/GoCalculator/web/utils"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/session"
 )
 
 type (
@@ -20,21 +21,19 @@ type (
 	MainHandler struct{}
 )
 
+var store = session.New()
+
 func (mh *MainHandler) GetHome(c *fiber.Ctx) error {
 
-	// var expressions []Expression
-	// URL := "http://orchestrator:8081/expressions"
-	// agent := fiber.Get(URL)
-	// agent.ContentType("application/json")
-	// _, body, errs := agent.Bytes()
-	// if len(errs) > 0 {
-	// 	return errors.Join(errs...)
-	// }
+	sess, err := store.Get(c)
+	if err != nil {
+		return c.Redirect("/login")
+	}
 
-	// err := json.Unmarshal(body, &expressions)
-	// if err != nil {
-	// 	return c.Status(400).SendString(err.Error())
-	// }
+	auth := sess.Get("auth")
+	if auth == nil {
+		return c.Redirect("/login")
+	}
 
 	return c.Render("home", fiber.Map{
 		"Title": "Distributed calculator",
