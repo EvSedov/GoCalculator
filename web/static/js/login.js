@@ -25,9 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const response = await res.json();
     if (res.ok) {
-      sessionStorage.setItem('token', response.token);
-      const auth = res.headers.get('Authorization')
-      sessionStorage.setItem('auth', auth);
+      const token = "Bearer " + response.token
+      sessionStorage.setItem('token', token);
       location.replace('/')
     }
   };

@@ -2,9 +2,9 @@ package routes
 
 import (
 	// "github.com/evsedov/GoCalculator/orchestrator/handlers"
-	"github.com/evsedov/GoCalculator/orchestrator/handlers/middleware"
+	"github.com/evsedov/GoCalculator/orchestrator/middleware"
 	"github.com/evsedov/GoCalculator/orchestrator/storage"
-	createexpression "github.com/evsedov/GoCalculator/orchestrator/use_cases/create_expression"
+	"github.com/evsedov/GoCalculator/orchestrator/use_cases/create_expression"
 	"github.com/evsedov/GoCalculator/orchestrator/use_cases/login"
 	"github.com/evsedov/GoCalculator/orchestrator/use_cases/register"
 	"github.com/gofiber/fiber/v2"
