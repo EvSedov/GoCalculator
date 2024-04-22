@@ -1,7 +1,3 @@
-if (!sessionStorage.token) {
-  location.replace('/login');
-}
-
 const url = 'http://localhost:8081/api/v1/expressions';
 
 async function loadExpressions() {
@@ -34,7 +30,7 @@ async function loadExpressions() {
         _li.append(_divWrap, _span);
         _ul.append(_li);
       });
-    } else {
+    } else if (response.message != "") {
       const _li = document.createElement('li');
       const _divWrap = document.createElement('div');
       const _div = document.createElement('div');
@@ -89,11 +85,13 @@ async function handleFormExpressionSubmit(event) {
 };
 
 document.addEventListener('DOMContentLoaded', function () {
+  if (!sessionStorage.token) {
+    location.replace('/login');
+  }
+
   const formExpression = document.forms.formExpression;
   loadExpressions();
   if (formExpression) {
     formExpression.addEventListener('submit', handleFormExpressionSubmit);
   }
-})
-
-
+});

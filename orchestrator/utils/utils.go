@@ -2,7 +2,7 @@ package utils
 
 import "strings"
 
-const Secret = "CTnRkgxS4QK-bRyl_8C51swvvDos9-Xr08A5_HwPE8c"
+var Secret = []byte("CTnRkgxS4QK_bRyl_8C51swvvDos9_Xr08A5_HwPE8c")
 
 func Calc(left, right float64, sign string) float64 {
 	var result float64

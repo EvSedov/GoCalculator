@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"github.com/evsedov/GoCalculator/orchestrator/entities"
+	"github.com/evsedov/GoCalculator/orchestrator/utils"
 	"github.com/golang-jwt/jwt/v5"
 )
 
@@ -20,14 +21,14 @@ func NewService(user UserCreater) *Service {
 }
 
 func (s *Service) CreateUser(user entities.User) *Response {
-	data, err := s.user.Create(&user)
+	_, err := s.user.Create(&user)
 	if err != nil {
 		return &Response{
 			Error: err.Error(),
 		}
 	}
 
-	hmacSampleSecret := data
+	hmacSampleSecret := utils.Secret
 	now := time.Now()
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"email": user.Email,

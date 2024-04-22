@@ -25,8 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const response = await res.json();
     if (res.ok) {
-      const token = "Bearer " + response.token
-      sessionStorage.setItem('token', token);
+      sessionStorage.setItem('token', response.token);
       location.replace('/')
     }
   };

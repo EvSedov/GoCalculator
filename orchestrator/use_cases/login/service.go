@@ -28,7 +28,7 @@ func (s *Service) Login(user entities.User) *Response {
 		}
 	}
 
-	hmacSampleSecret := []byte(utils.Secret)
+	hmacSampleSecret := utils.Secret
 	now := time.Now()
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"email": user.Email,
