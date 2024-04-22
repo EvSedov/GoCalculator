@@ -20,8 +20,9 @@ func NewStorage() *storage {
 	if err := godotenv.Load(); err != nil {
 		log.Fatalf("err loading: %v", err)
 	}
+	// hostName := "127.0.0.1"
+	hostName := os.Getenv("DB_HOST")
 	dbPort := 5432
-	hostName := "127.0.0.1"
 	dbUser := os.Getenv("DB_USER")
 	dbPassword := os.Getenv("DB_PASSWORD")
 	dbName := os.Getenv("DB_NAME")
