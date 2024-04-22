@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   logout.addEventListener('click', (event) => {
     event.preventDefault()
+    clearInterval(intervalId);
     sessionStorage.clear();
   });
 });

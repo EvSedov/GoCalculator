@@ -1,3 +1,4 @@
+var intervalId;
 const url = 'http://localhost:8081/api/v1/expressions';
 
 async function loadExpressions() {
@@ -91,6 +92,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const formExpression = document.forms.formExpression;
   loadExpressions();
+  intervalId = setInterval(loadExpressions, 10000);
   if (formExpression) {
     formExpression.addEventListener('submit', handleFormExpressionSubmit);
   }
