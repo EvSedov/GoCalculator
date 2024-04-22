@@ -16,7 +16,7 @@ func (s *storage) CreateNew(expression *entities.Expression) (err error) {
 
 func (s *storage) GetExpressionsByEmail(email string) (expressions []byte, err error) {
 	var dbExpressions []entities.Expression
-	err = s.DB.Table("expression").Where("email = ?", email).Find(&dbExpressions).Error
+	err = s.DB.Table("expressions").Where("email = ?", email).Find(&dbExpressions).Error
 	if err != nil {
 		return nil, err
 	}
