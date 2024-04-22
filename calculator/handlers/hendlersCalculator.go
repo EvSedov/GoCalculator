@@ -16,8 +16,7 @@ type (
 	}
 
 	CreateRegistrationRespons struct {
-		ServerID   string `form:"request_id"`
-		Expression string `form:"expression"`
+		Expression string `json:"expression"`
 	}
 )
 

@@ -34,7 +34,7 @@ func (h *Handler) GetExpressionById(c *fiber.Ctx) error {
 	return c.Status(200).JSON(expression)
 }
 
-func (h *Handler) GetValidExpressionToWork(c *fiber.Ctx) error {
+func (h *Handler) GetExpressionToCalculate(c *fiber.Ctx) error {
 	var response CreateExpressionWork
 
 	expression := entities.Expression{}

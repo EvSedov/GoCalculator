@@ -17,6 +17,7 @@ async function loadExpressions() {
     const userExpressions = [...response["user_expressions"]];
     if (userExpressions.length > 0) {
       userExpressions.forEach((item) => {
+        const expression = (item.result != '') ? `${item.expression} = ${item.result}` : item.expression;
         const _li = document.createElement('li')
         const _divWrap = document.createElement('div')
         const _div = document.createElement('div')
@@ -26,7 +27,7 @@ async function loadExpressions() {
         _div.classList.add('fw-bold');
         _span.classList.add('badge', 'bg-primary', 'rounded-pill')
         _span.append(item.state)
-        _div.append(item.expression);
+        _div.append(expression);
         _divWrap.append(_div, item.message);
         _li.append(_divWrap, _span);
         _ul.append(_li);
