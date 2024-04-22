@@ -13,7 +13,7 @@
 </ul>
 <div class="tab-content pt-5" id="tab-content">
   <div class="tab-pane active" id="icon-tabpanel-0" role="tabpanel" aria-labelledby="icon-tab-0">
-    <form id="form-expression" name="FormExpression">
+    <form id="formExpression" name="FormExpression">
       <div class="mb-3">
         <label for="inputExpression" class="form-label">Arithmetic expression</label>
         <input type="text" name="expression" class="form-control" id="input-expression"
@@ -22,28 +22,6 @@
       <button id="btn-send" type="submit" class="btn btn-primary" data-bs-toggle="tooltip">Send</button>
     </form>
     <ul class="list-group mt-3">
-      {{if .Expressions}}
-      {{ range .Expressions }}
-      <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="ms-2 me-auto">
-          {{ if .Result }}
-          <div class="fw-bold">{{ .Expression }} = {{ .Result }}</div>
-          {{ else }}
-          <div class="fw-bold">{{ .Expression }}</div>
-          {{end }}
-          {{.Message}}
-        </div>
-        <span class="badge bg-primary rounded-pill">{{ .State }}</span>
-      </li>
-      {{ end }}
-      {{ else }}
-      <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="ms-2 me-auto">
-          <div class="fw-bold">Выражения на сервер не отправлялись</div>
-          Для отправки выражения введите его в поле для ввода и нажмите кнопку "Send"
-        </div>
-      </li>
-      {{ end }}
     </ul>
   </div>
   <div class="tab-pane" id="icon-tabpanel-1" role="tabpanel" aria-labelledby="icon-tab-1">
