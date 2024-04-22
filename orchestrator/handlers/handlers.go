@@ -34,13 +34,6 @@ func (h *Handler) GetExpressionById(c *fiber.Ctx) error {
 	return c.Status(200).JSON(expression)
 }
 
-func (h *Handler) GetExpressions(c *fiber.Ctx) error {
-	expressions := []entities.Expression{}
-	// h.Storage.DB.Find(&expressions)
-
-	return c.Status(200).JSON(expressions)
-}
-
 func (h *Handler) GetValidExpressionToWork(c *fiber.Ctx) error {
 	var response CreateExpressionWork
 
