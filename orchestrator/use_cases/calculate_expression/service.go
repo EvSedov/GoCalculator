@@ -33,7 +33,7 @@ func (s *Service) GetExpressionToCalculate() *Response {
 	}
 
 	return &Response{
-		Message:     "ok",
-		Expressions: expression,
+		Message:    "ok",
+		Expression: expression,
 	}
 }

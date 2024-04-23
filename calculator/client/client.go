@@ -3,7 +3,6 @@ package client
 import (
 	"encoding/json"
 	"errors"
-
 	"net/http"
 	"os"
 	"strconv"
@@ -14,17 +13,22 @@ import (
 )
 
 type (
-	ExpressionToWork struct {
+	Expression struct {
 		ExpressionId string `json:"expression_id"`
 		Expression   string `json:"expression"`
 		Result       string `json:"result"`
 		State        string `json:"state"`
 		Message      string `json:"message"`
 	}
+
+	Response struct {
+		Expression Expression `json:"expression"`
+		Message    string     `json:"message"`
+	}
 )
 
 const (
-	BaseURL = "http://orchestrator:8081/task"
+	BaseURL = "http://orchestrator:8081/api/v1/calculate"
 )
 
 type Client struct {
@@ -44,34 +48,40 @@ func NewClient() *Client {
 	}
 }
 
-func (c *Client) GetExpressionToWork(ctx *fiber.Ctx) (ExpressionToWork, error) {
+func (c *Client) GetExpression(ctx *fiber.Ctx) Response {
 
-	var expression ExpressionToWork
+	var getResponse Response
 	var body []byte
 	var errs []error
 
 	request := fiber.Get(BaseURL)
 	request.ContentType("application/json")
 	_, body, errs = request.Bytes()
-
 	if len(errs) > 0 {
-		return ExpressionToWork{}, errors.Join(errs...)
+		return Response{
+			Message: errors.Join(errs...).Error(),
+		}
 	}
 
 	// читаем тело ответа
-	err := json.Unmarshal(body, &expression)
+	err := json.Unmarshal(body, &getResponse)
 	if err != nil {
-		return ExpressionToWork{}, err
+		return Response{
+			Message: err.Error(),
+		}
 	}
 
-	result, _ := utils.CalcExpression(expression.Expression)
+	result, _ := utils.CalcExpression(getResponse.Expression.Expression)
 	if result == "" {
-		return ExpressionToWork{}, errors.New("not valid expressions on server, result is empty string")
+		return Response{
+			Message: "not valid expressions on server, result is empty string",
+		}
 	}
 
-	expression.Result = result
-	expression.State = "ok"
-	expression.Message = "the expression is calculated"
+	getResponse.Expression.Result = result
+	getResponse.Expression.State = "ok"
+	getResponse.Expression.Message = "the expression is calculated"
+	getResponse.Message = "calculated"
 
-	return expression, nil
+	return getResponse
 }

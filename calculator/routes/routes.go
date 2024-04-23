@@ -6,7 +6,7 @@ import (
 )
 
 func SetupRoutesCalculator(app *fiber.App) {
-	calculatorHandlers := &handlers.CalculatorHendler{}
+	handlers := &handlers.CalculatorHendler{}
 
-	app.Get("/start", calculatorHandlers.Start)
+	app.Get("/start", handlers.Start)
 }
