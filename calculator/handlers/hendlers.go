@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"time"
 
 	"github.com/evsedov/GoCalculator/calculator/client"
 	"github.com/gofiber/fiber/v2"
@@ -35,6 +36,7 @@ func (calc *CalculatorHendler) Start(ctx *fiber.Ctx) error {
 		return ctx.Status(500).JSON("error: parse json")
 	}
 
+	time.Sleep(15 * time.Second)
 	POSTResponse, err := http.Post("http://orchestrator:8081/api/v1/calculate", "application/json", bytes.NewReader(data))
 	if err != nil {
 		return ctx.Status(500).SendString("error: send post response")
